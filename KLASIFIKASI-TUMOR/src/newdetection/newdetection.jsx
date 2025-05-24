@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Container, Card, Button, Alert, Form, Row, Col } from 'react-bootstrap';
+import {
+  Container, Card, Button, Alert, Form, Row, Col, Spinner,
+} from 'react-bootstrap';
 import { FaMicroscope, FaUpload, FaInfoCircle } from 'react-icons/fa';
 
 function NewDetection() {
@@ -8,6 +10,7 @@ function NewDetection() {
   const [result, setResult] = useState('');
   const [file, setFile] = useState(null);
   const [errorMsg, setErrorMsg] = useState('');
+  const [loading, setLoading] = useState(false); // 🔄 Tambah loading state
 
   const user = JSON.parse(localStorage.getItem('user'));
   const userId = user?.id;
@@ -42,6 +45,8 @@ function NewDetection() {
     formData.append('image', file);
     formData.append('user_id', userId);
 
+    setLoading(true); // 🔄 Aktifkan spinner
+
     try {
       const response = await fetch('http://127.0.0.1:5000/predict', {
         method: 'POST',
@@ -60,6 +65,8 @@ function NewDetection() {
     } catch (err) {
       console.error('Error:', err);
       setErrorMsg('Gagal menghubungi server.');
+    } finally {
+      setLoading(false); // 🔄 Matikan spinner
     }
   };
 
@@ -74,15 +81,14 @@ function NewDetection() {
                 Deteksi Tumor Otak
               </Card.Title>
 
-              {/* 🧾 Cara Penggunaan */}
               <Alert variant="secondary">
                 <FaInfoCircle className="me-2" />
                 <strong>Cara Penggunaan:</strong>
                 <ul className="mt-2 mb-0 ps-3">
-                  <li>Unggah gambar MRI otak dengan format <strong>JPG, JPEG, atau PNG</strong>.</li>
-                  <li>Pastikan gambar merupakan hasil pemindaian otak, bukan gambar makanan, hewan, atau organ lain.</li>
-                  <li>Klik <strong>Mulai Deteksi</strong> untuk mendapatkan hasil klasifikasi tumor dan tingkat kepercayaannya.</li>
-                  <li>Hasil akan otomatis tersimpan ke riwayat Anda jika berhasil.</li>
+                  <li>Unggah gambar MRI otak (JPG, JPEG, PNG).</li>
+                  <li>Pastikan itu bukan makanan, hewan, atau organ selain otak.</li>
+                  <li>Klik <strong>Mulai Deteksi</strong> untuk klasifikasi.</li>
+                  <li>Hasil akan otomatis tersimpan ke riwayat.</li>
                 </ul>
               </Alert>
 
@@ -106,10 +112,19 @@ function NewDetection() {
                 <Button
                   variant="primary"
                   onClick={handlePredict}
-                  disabled={!file}
+                  disabled={!file || loading}
                 >
-                  <FaUpload className="me-2" />
-                  Mulai Deteksi
+                  {loading ? (
+                    <>
+                      <Spinner animation="border" size="sm" className="me-2" />
+                      Sedang memproses...
+                    </>
+                  ) : (
+                    <>
+                      <FaUpload className="me-2" />
+                      Mulai Deteksi
+                    </>
+                  )}
                 </Button>
               </div>
 
