@@ -39,4 +39,4 @@ API: [https://api.capstone.daffakhairullah.my.id](https://api.capstone.daffakhai
 ├── public/ # Assets (favicon, images, etc.)
 └── README.md
 
-model h5 : https://drive.google.com/file/d/1odKvxtb9EOO361azKiduS7ZJWvXsh7GI/view?usp=sharing
+FILE MACHINELEARNING :(https://drive.google.com/drive/folders/1mvKnUY-gzsQcuvBsmDTM_QVJA8upj2bO)
