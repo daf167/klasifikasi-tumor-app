@@ -40,3 +40,8 @@ API: [https://api.capstone.daffakhairullah.my.id](https://api.capstone.daffakhai
 └── README.md
 
 FILE MACHINELEARNING :(https://drive.google.com/drive/folders/1mvKnUY-gzsQcuvBsmDTM_QVJA8upj2bO)
+
+## 🤖 Machine Learning Model
+
+- Model files: [Google Drive Folder](https://drive.google.com/drive/folders/1mvKnUY-gzsQcuvBsmDTM_QVJA8upj2bO)
+- Machine Learning Repository: [https://github.com/nanda910/Brain-Tumor-Detection](https://github.com/nanda910/Brain-Tumor-Detection)
